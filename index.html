@@ -449,12 +449,22 @@
       position: sticky;
       top: 0;
       z-index: 1;
+      transition: background-color 1s ease;
+    }
+
+    .section-about.is-leaving {
+      background-color: var(--neutral-100);
     }
 
     #aboutBtn {
       opacity: 0;
       transform: translateY(16px);
-      transition: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .section-about.is-leaving #aboutBtn {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .word {
@@ -880,12 +890,13 @@
     /* ── CTA SECTION ── */
     .section-cta {
       background-color: var(--yellow);
-      min-height: 80vh;
+      min-height: 100svh;
       padding: var(--section-y-lg) var(--pad-x);
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      position: sticky;
+      top: 0;
       z-index: 1;
     }
 
@@ -912,8 +923,17 @@
       background-color: var(--neutral-900);
       color: var(--white);
       padding: 4.5rem var(--pad-x) 2.5rem;
-      position: relative;
-      z-index: 1;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      transform: translateY(100%);
+      will-change: transform;
+    }
+
+    #footerSpacer {
+      /* height set by JS = footer.offsetHeight */
     }
 
     .footer-grid {
@@ -967,6 +987,20 @@
 
     .footer-bottom a { color: rgba(255,255,255,0.25); transition: color 0.15s; }
     .footer-bottom a:hover { color: var(--white); }
+
+    .footer-wordmark {
+      opacity: 0.1;
+      width: calc(100% + var(--pad-x) * 2);
+      margin-left: calc(-1 * var(--pad-x));
+      display: block;
+      padding-top: 2rem;
+    }
+
+    .footer-wordmark svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -1410,6 +1444,8 @@
   </section>
 
   <!-- ── FOOTER ── -->
+  <div id="footerSpacer"></div>
+
   <footer>
     <div class="footer-grid">
       <div>
@@ -1453,6 +1489,17 @@
           <li><a href="#">ALGARVE 2030</a></li>
         </ul>
       </div>
+    </div>
+
+    <div class="footer-wordmark">
+      <svg viewBox="0 0 103 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M38.1094 20.5308V9.40445C38.1094 8.01848 38.1094 7.3255 38.2467 6.75359C38.6829 4.93656 40.1016 3.51787 41.9186 3.08164C42.4905 2.94434 43.1835 2.94434 44.5695 2.94434H49.2648C50.6508 2.94434 51.3438 2.94434 51.9157 3.08164C53.7327 3.51787 55.1514 4.93656 55.5876 6.75359C55.7249 7.3255 55.7249 8.01848 55.7249 9.40445V20.5308" stroke="white" stroke-width="3.19456"/>
+        <path d="M38.1094 12.3687H55.7111" stroke="white" stroke-width="3.19456"/>
+        <path d="M3.27539 20.5308V2.94434H14.407C17.0345 2.94434 19.1663 5.07086 19.1727 7.69831C19.1793 10.3349 17.0437 12.4758 14.407 12.4758H3.29893" stroke="white" stroke-width="3.19456"/>
+        <path d="M23.9492 1.38546V8.45569C23.9492 10.6815 23.9492 11.7945 24.1697 12.7129C24.8703 15.6311 27.1487 17.9095 30.0668 18.61C30.9853 18.8305 32.0982 18.8305 34.3241 18.8305L34.9436 18.8305" stroke="white" stroke-width="3.19456"/>
+        <path d="M60.7793 20.5502V7.27478C60.7793 5.41715 60.7793 4.48834 60.9434 4.08871C61.4853 2.769 63.1243 2.31173 64.2711 3.16033C64.6184 3.4173 65.0992 4.21197 66.0609 5.80131L72.2557 16.0398C73.2174 17.6291 73.6982 18.4238 74.0455 18.6808C75.1923 19.5294 76.8313 19.0721 77.3732 17.7524C77.5373 17.3528 77.5373 16.4239 77.5373 14.5663V1.29171" stroke="white" stroke-width="3.09623"/>
+        <path d="M82.5762 20.5497V7.27429C82.5762 5.41667 82.5762 4.48785 82.7403 4.08822C83.2821 2.76851 84.9212 2.31125 86.068 3.15984C86.4153 3.41681 86.8961 4.21148 87.8577 5.80082L94.0526 16.0393C95.0143 17.6286 95.4951 18.4233 95.8424 18.6803C96.9892 19.5289 98.6282 19.0716 99.1701 17.7519C99.3342 17.3523 99.3342 16.4235 99.3342 14.5658V1.29122" stroke="white" stroke-width="3.09623"/>
+      </svg>
     </div>
 
     <div class="footer-bottom">
@@ -1561,9 +1608,9 @@
         aboutWords[i].style.opacity = 0.1 + 0.9 * wordProg;
       }
 
-      const btnProg = Math.min(1, Math.max(0, (phase2 - 0.62) / 0.25));
-      aboutBtn.style.opacity   = btnProg;
-      aboutBtn.style.transform = `translateY(${(1 - btnProg) * 16}px)`;
+
+      // Phase 3: trigger CSS transition when section unsticks
+      aboutSection.classList.toggle('is-leaving', sy >= aboutStickyTop + extra);
     }
 
     /* ── HERO OVERLAY ── */
@@ -1593,17 +1640,46 @@
 
           requestAnimationFrame(() => {
             initServices();
+            requestAnimationFrame(() => { initFooter(); });
           });
         });
       });
     }
 
-    window.addEventListener('scroll', () => { updateNav(); updateHeroOverlay(); updateAbout(); updateTeam(); updateServices(); }, { passive: true });
+    window.addEventListener('scroll', () => { updateNav(); updateHeroOverlay(); updateAbout(); updateTeam(); updateServices(); updateFooter(); }, { passive: true });
     window.addEventListener('resize', initAll);
     window.addEventListener('load',   initAll);
     updateNav();
     initAll();
     setTimeout(initAll, 400);
+
+    /* ── FOOTER scroll-driven reveal ── */
+    const footer       = document.querySelector('footer');
+    const footerSpacer = document.getElementById('footerSpacer');
+    let footerSpacerTop  = 0;
+    let footerScrollDist = 0;
+
+    function initFooter() {
+      const footerH    = footer.offsetHeight;
+      footerScrollDist = footerH;
+      const ctaSection  = document.querySelector('.section-cta');
+      footerSpacerTop   = ctaSection.offsetTop;
+      const spacerDomTop = footerSpacer.offsetTop;
+      // Spacer must provide enough scroll room: from its DOM position up to
+      // footerSpacerTop + footerScrollDist + viewportH (so progress reaches 1)
+      const needed = Math.max(0, footerSpacerTop - spacerDomTop) + footerH + window.innerHeight;
+      footerSpacer.style.height = needed + 'px';
+      updateFooter();
+    }
+
+    function updateFooter() {
+      const raw      = window.scrollY - footerSpacerTop;
+      const progress = Math.min(1, Math.max(0, raw / (footerScrollDist || 1)));
+      footer.style.transform = `translateY(${(1 - progress) * 100}%)`;
+    }
+
+    window.addEventListener('resize', initFooter);
+    window.addEventListener('load',   initFooter);
   </script>
 </body>
 </html>
