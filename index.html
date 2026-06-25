@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLANN | Homepage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Colours from Webflow CSS */
+      --neutral-900: #122023;
+      --neutral-800: #1f2b2e;
+      --neutral-700: #384042;
+      --neutral-600: #565c5d;
+      --neutral-500: #8a8a8a;
+      --neutral-400: #bebaa7;
+      --neutral-300: #e8e3c9;
+      --neutral-200: #f3f0e2;
+      --neutral-100: #f9f8f1;
+      --white:  #ffffff;
+      --yellow: #ffd924;
+      /* opacity tokens */
+      --white-10: rgba(255,255,255,0.1);
+      --white-50: rgba(255,255,255,0.5);
+      /* border-radius */
+      --r-sm: 0.125rem;
+      --r-md: 0.5rem;
+      --r-lg: 0.75rem;
+      /* spacing */
+      --pad-x: 2rem;
+      --section-y-lg: 7rem;
+      --section-y-md: 5rem;
+
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--neutral-100);
+      color: var(--neutral-900);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: clip;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── TYPOGRAPHY ── */
+    .heading-h1 {
+      font-family: var(--font-body);
+      font-size: 7rem;
+      font-weight: 500;
+      letter-spacing: -0.06em;
+      line-height: 1;
+    }
+
+    .heading-h2 {
+      font-family: var(--font-body);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 400;
+      letter-spacing: -0.06em;
+      line-height: 1;
+    }
+
+    .heading-h3 {
+      font-family: var(--font-body);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: -0.06em;
+      line-height: 1.1;
+    }
+
+    .body-l {
+      font-size: 1.125rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+    }
+
+    .body-m {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .body-xs {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ── LAYOUT ── */
+    .padding-global { padding-left: var(--pad-x); padding-right: var(--pad-x); }
+    .padding-section-lg { padding-top: var(--section-y-lg); padding-bottom: var(--section-y-lg); }
+    .padding-section-md { padding-top: var(--section-y-md); padding-bottom: var(--section-y-md); }
+    .full-height { height: 100svh; }
+
+    /* ── TAG ── */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      padding: 0.2rem 0.35rem;
+      border-radius: var(--r-sm);
+      background-color: var(--neutral-300);
+      color: var(--neutral-900);
+    }
+
+    .tag.is-alt2 {
+      background-color: var(--white-10);
+      color: var(--white-50);
+    }
+
+    /* ── BUTTON ── */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      border-radius: var(--r-md);
+      border: none;
+      background-color: var(--neutral-800);
+      color: var(--neutral-300);
+      transition: background-color 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button:hover { background-color: var(--neutral-700); }
+
+    /* Icon button: arrow animates left→right on hover */
+    .button.is-icon {
+      gap: 0.5rem;
+      padding-right: 3rem;
+    }
+
+    .btn-arrow-left,
+    .btn-arrow-right {
+      position: absolute;
+      width: 1.25rem;
+      height: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .btn-arrow-left  { right: 1rem; opacity: 1; }
+    .btn-arrow-right { left: 1rem; opacity: 0; }
+
+    .button.is-icon:hover { padding-left: 3rem; padding-right: 1rem; }
+    .button.is-icon:hover .btn-arrow-left  { right: -1.5rem; opacity: 0; }
+    .button.is-icon:hover .btn-arrow-right { opacity: 1; }
+
+    /* Secondary button (outlined) */
+    .button.is-secondary {
+      border: 1px solid var(--neutral-400);
+      background-color: transparent;
+      color: var(--neutral-900);
+    }
+    .button.is-secondary:hover { background-color: var(--neutral-200); }
+
+    /* Yellow button */
+    .button.yellow {
+      background-color: var(--yellow);
+      color: var(--neutral-900);
+    }
+    .button.yellow:hover { background-color: #f5c800; }
+
+    /* White/ghost button for hero */
+    .button.is-ghost {
+      border: 1px solid rgba(255,255,255,0.3);
+      background-color: transparent;
+      color: white;
+    }
+    .button.is-ghost:hover { background-color: rgba(255,255,255,0.1); }
+
+    /* ── NAV ── */
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 var(--pad-x);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(18,32,35,0.1);
+      background: rgba(249,248,241,0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      margin: 0 calc(-1 * var(--pad-x));
+      padding-left: var(--pad-x);
+      padding-right: var(--pad-x);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+
+    /* Transparent dark nav when scrolled inside hero */
+    .navbar-wrapper.is-hero .nav-inner {
+      background: transparent;
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+
+    .navbar-wrapper.is-hero .nav-logo svg { color: white; }
+
+    .navbar-wrapper.is-hero .nav-links a {
+      color: rgba(255,255,255,0.6);
+      background-color: transparent;
+    }
+
+    .navbar-wrapper.is-hero .nav-links a:hover {
+      color: white;
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    .navbar-wrapper.is-hero .nav-links a.active {
+      color: white;
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    .navbar-wrapper.is-hero .locale-btn {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .nav-logo { line-height: 0; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--neutral-700);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--r-md);
+      background-color: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    .nav-links a:hover { background-color: var(--neutral-200); color: var(--neutral-900); }
+    .nav-links a.active { color: var(--neutral-900); background-color: var(--neutral-200); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .locale-btn {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--neutral-600);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      background-color: rgba(255,255,255,0.04);
+      transition: background-color 0.25s;
+    }
+    .locale-btn:hover { background-color: var(--neutral-200); }
+
+    /* ── HERO ── */
+    .section-hero {
+      position: sticky;
+      top: 0;
+      min-height: 100svh;
+      background-color: var(--neutral-900);
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    /* scroll-driven dark overlay */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    /* background image layer */
+    .hero-bg {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      width: 100vw;
+      height: 100svh;
+    }
+
+    /* gradient vignette so bottom text stays readable */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(18,32,35,0.25) 0%, transparent 40%, rgba(18,32,35,0.7) 100%);
+      z-index: 1;
+    }
+
+    .hero-bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .hero-bg-ph {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #2a3b3d 0%, #0e1a1c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    /* content layer */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 7rem;
+      padding-bottom: 3.25rem;
+      color: white;
+      padding-left: var(--pad-x);
+      padding-right: var(--pad-x);
+    }
+
+    /* H1 lives at the top */
+    .hero-h1 {
+      font-size: clamp(2.5rem, 7.5vw, 7rem);
+      font-weight: 500;
+      letter-spacing: -0.06em;
+      line-height: 1;
+      color: white;
+    }
+
+    .hero-cycling-word {
+      color: var(--yellow);
+      font-style: italic;
+      display: inline-block;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-cycling-word.exit {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+
+    /* bottom row: description left + tags right */
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .hero-text-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: rgba(255,255,255,0.75);
+      max-width: 22rem;
+    }
+
+    /* Tags: 3 rows bottom-right of hero */
+    .tag-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      gap: 0.375rem;
+    }
+
+    .tag-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.125rem;
+    }
+
+    /* ── ABOUT / FOLLOWUP — yellow bg ── */
+    .section-about {
+      background-color: var(--yellow);
+      color: var(--neutral-900);
+      padding: 0 var(--pad-x);
+      height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    #aboutBtn {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: none;
+    }
+
+    .word {
+      display: inline;
+      opacity: 0.2;
+      will-change: opacity;
+    }
+
+    .about-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2.5rem;
+    }
+
+    .about-heading {
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: -0.06em;
+      line-height: 1.1;
+      max-width: 48rem;
+    }
+
+    .about-heading .white { color: var(--white); }
+
+    /* ── WORK SECTION ── */
+    .section-work {
+      background-color: var(--neutral-100);
+      padding: var(--section-y-lg) var(--pad-x);
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-top-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      max-width: 39.5rem;
+    }
+
+    /* Work grid: 2 per row */
+    .work-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem 2.5rem;
+    }
+
+    .work-item {
+      width: calc(50% - 1.25rem);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .work-img-wrap {
+      aspect-ratio: 632 / 355;
+      border-radius: var(--r-md);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .work-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .work-item:hover .work-img { transform: scale(1.06); }
+
+    .work-item-meta {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-top: 0.938rem;
+      overflow: hidden;
+    }
+
+    .work-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+
+    .work-item-name {
+      font-size: 1.125rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+    }
+
+    .work-item-cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--neutral-500);
+    }
+
+    /* Arrow pair on work items */
+    .work-arrow {
+      position: relative;
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .work-arrow svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transition: all 0.25s;
+    }
+
+    .work-arrow .arr-right { opacity: 1; }
+    .work-arrow .arr-left  { opacity: 0; transform: translateX(-6px); }
+
+    .work-item:hover .work-arrow .arr-right { opacity: 0; transform: translateX(6px); }
+    .work-item:hover .work-arrow .arr-left  { opacity: 1; transform: translateX(0); }
+
+    /* ── LOGO SECTION ── */
+    .section-logos {
+      background-color: var(--neutral-100);
+      border-top: 1px solid var(--neutral-300);
+      border-bottom: 1px solid var(--neutral-300);
+      padding: 3rem 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logos-track-wrap {
+      display: flex;
+      width: max-content;
+      animation: scroll-logos 30s linear infinite;
+    }
+
+    .logos-track-wrap:hover { animation-play-state: paused; }
+
+    @keyframes scroll-logos {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .logos-row {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      padding: 0 2rem;
+    }
+
+    .logo-name {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--neutral-500);
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .logo-name:hover { color: var(--neutral-900); }
+
+    /* ── TEAM SECTION ── */
+    #teamPinSpacer {
+      /* height set by JS: 100svh + horizontal scroll distance */
+    }
+
+    .section-team {
+      background-color: var(--neutral-100);
+      padding-top: var(--section-y-lg);
+      /* no bottom padding — height is locked to 100svh */
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      height: 100svh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .team-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      padding: 0 var(--pad-x);
+      flex-shrink: 0;
+    }
+
+    .team-header-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      max-width: 39.5rem;
+    }
+
+    /* Swiper — overflow hidden, controlled via JS translateX */
+    .team-swiper-wrap {
+      overflow: hidden;
+      padding: 0 var(--pad-x) var(--section-y-md);
+      flex: 1;
+      min-height: 0;
+    }
+
+    .team-track {
+      display: flex;
+      gap: 1rem;
+      height: 100%;
+      width: max-content;
+      user-select: none;
+      will-change: transform;
+    }
+
+    /* Each card — height fills the track, width from aspect-ratio */
+    .team-card {
+      position: relative;
+      aspect-ratio: 340 / 420;
+      height: 100%;
+      width: auto;
+      flex-shrink: 0;
+      border: 2px solid var(--neutral-200);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    /* Image area fills top */
+    .team-card-img-area {
+      position: absolute;
+      inset: 0;
+      bottom: 4.25rem;
+      z-index: 0;
+    }
+
+    .team-card-img-ph {
+      width: 100%;
+      height: 100%;
+      background: var(--neutral-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--neutral-500);
+      text-transform: uppercase;
+    }
+
+    .team-card-img-area .back-ph {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: var(--neutral-400);
+      transition: opacity 0.35s ease;
+    }
+
+    .team-card:hover .back-ph { opacity: 1; }
+
+    /* White text footer panel */
+    .team-card-text {
+      position: relative;
+      z-index: 1;
+      background-color: var(--white);
+      min-height: 4.5rem;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      flex-shrink: 0;
+    }
+
+    .team-card-name {
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .team-card-desc {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--neutral-500);
+    }
+
+    /* ── SERVICES ── */
+    .section-services {
+      background-color: var(--neutral-100);
+      color: var(--neutral-900);
+      padding: var(--section-y-lg) var(--pad-x);
+      height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: stretch;
+      overflow: hidden;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .services-col-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .services-col-top { }
+
+    .services-col-bottom { }
+
+    .services-col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .services-header-desc {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.5;
+      color: var(--neutral-600);
+    }
+
+    .services-list { list-style: none; }
+
+    .service-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--neutral-300);
+      cursor: pointer;
+      color: var(--neutral-400);
+      transition: color 0.3s;
+    }
+
+    .service-row:first-child { border-top: 1px solid var(--neutral-300); }
+
+    .service-row.active { color: var(--neutral-900); }
+
+    .service-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .service-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      transition: color 0.3s;
+    }
+
+    .service-row.active .service-num { color: var(--neutral-900); }
+
+    .service-name {
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .service-arrow {
+      width: 1.25rem;
+      height: 1.25rem;
+      opacity: 0;
+      flex-shrink: 0;
+      transition: opacity 0.3s;
+    }
+
+    .service-row.active .service-arrow { opacity: 1; }
+
+    .services-img {
+      flex: 1;
+      min-height: 0;
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--neutral-200);
+      position: relative;
+    }
+
+    .svc-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .svc-img.active { opacity: 1; }
+
+    /* ── CTA SECTION ── */
+    .section-cta {
+      background-color: var(--yellow);
+      min-height: 80vh;
+      padding: var(--section-y-lg) var(--pad-x);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      gap: 1.5rem;
+      width: 40rem;
+      max-width: 100%;
+    }
+
+    .cta-inner p {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.5;
+      color: var(--neutral-700);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background-color: var(--neutral-900);
+      color: var(--white);
+      padding: 4.5rem var(--pad-x) 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2rem;
+    }
+
+    .footer-about {
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.4);
+      margin-top: 1rem;
+      max-width: 22rem;
+    }
+
+    .footer-col-heading {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.75rem; }
+    .footer-col a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.15s;
+    }
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .footer-bottom a { color: rgba(255,255,255,0.25); transition: color 0.15s; }
+    .footer-bottom a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <div class="navbar-wrapper">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="PLANN">
+        <svg width="90" height="19" viewBox="0 0 103 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M38.1094 20.5308V9.40445C38.1094 8.01848 38.1094 7.3255 38.2467 6.75359C38.6829 4.93656 40.1016 3.51787 41.9186 3.08164C42.4905 2.94434 43.1835 2.94434 44.5695 2.94434H49.2648C50.6508 2.94434 51.3438 2.94434 51.9157 3.08164C53.7327 3.51787 55.1514 4.93656 55.5876 6.75359C55.7249 7.3255 55.7249 8.01848 55.7249 9.40445V20.5308" stroke="currentColor" stroke-width="3.19456"/>
+          <path d="M38.1094 12.3687H55.7111" stroke="currentColor" stroke-width="3.19456"/>
+          <path d="M3.27539 20.5308V2.94434H14.407C17.0345 2.94434 19.1663 5.07086 19.1727 7.69831C19.1793 10.3349 17.0437 12.4758 14.407 12.4758H3.29893" stroke="currentColor" stroke-width="3.19456"/>
+          <path d="M23.9492 1.38546V8.45569C23.9492 10.6815 23.9492 11.7945 24.1697 12.7129C24.8703 15.6311 27.1487 17.9095 30.0668 18.61C30.9853 18.8305 32.0982 18.8305 34.3241 18.8305L34.9436 18.8305" stroke="currentColor" stroke-width="3.19456"/>
+          <path d="M60.7793 20.5502V7.27478C60.7793 5.41715 60.7793 4.48834 60.9434 4.08871C61.4853 2.769 63.1243 2.31173 64.2711 3.16033C64.6184 3.4173 65.0992 4.21197 66.0609 5.80131L72.2557 16.0398C73.2174 17.6291 73.6982 18.4238 74.0455 18.6808C75.1923 19.5294 76.8313 19.0721 77.3732 17.7524C77.5373 17.3528 77.5373 16.4239 77.5373 14.5663V1.29171" stroke="currentColor" stroke-width="3.09623"/>
+          <path d="M82.5762 20.5497V7.27429C82.5762 5.41667 82.5762 4.48785 82.7403 4.08822C83.2821 2.76851 84.9212 2.31125 86.068 3.15984C86.4153 3.41681 86.8961 4.21148 87.8577 5.80082L94.0526 16.0393C95.0143 17.6286 95.4951 18.4233 95.8424 18.6803C96.9892 19.5289 98.6282 19.0716 99.1701 17.7519C99.3342 17.3523 99.3342 16.4235 99.3342 14.5658V1.29122" stroke="currentColor" stroke-width="3.09623"/>
+        </svg>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/work">Work</a></li>
+        <li><a href="/about">People</a></li>
+        <li><a href="/careers">Jobs</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <span class="locale-btn">En</span>
+        <a href="/contact" class="button is-icon yellow">
+          <span>Get in touch</span>
+          <span class="btn-arrow-left">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="btn-arrow-right">
+            <svg width="20" height="20" viewBox="0 0 20 20"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="section-hero">
+    <div class="hero-overlay" id="heroOverlay"></div>
+    <!-- Hero background photo -->
+    <div class="hero-bg">
+      <img class="hero-bg-img" src="hero-bg.jpg" alt="" />
+    </div>
+
+    <div class="hero-content">
+
+      <!-- H1 at TOP -->
+      <h1 class="hero-h1">
+        Crafting engineering with<br>
+        <span class="hero-cycling-word" id="cyclingWord">love</span>
+      </h1>
+
+      <!-- Text + tags at BOTTOM -->
+      <div class="hero-bottom">
+        <div class="hero-text-col">
+          <p class="hero-desc">Plann is a space where creativity and forward thinking shapes the future of engineering building design with BIM.</p>
+          <a href="#about" class="button is-icon is-ghost">
+            <span>Scroll down</span>
+            <span class="btn-arrow-left">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M10 16l6-6M10 16l-6-6" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="btn-arrow-right">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M10 16l6-6M10 16l-6-6" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </div>
+
+        <div class="tag-wrapper">
+          <div class="tag-row">
+            <span class="tag is-alt2">Make</span>
+            <span class="tag is-alt2">It</span>
+            <span class="tag is-alt2">Matter</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag is-alt2">Made</span>
+            <span class="tag is-alt2">with</span>
+            <span class="tag is-alt2">♥</span>
+            <span class="tag is-alt2">from</span>
+            <span class="tag is-alt2">Alvor</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag is-alt2">PLANN</span>
+            <span class="tag is-alt2">©</span>
+            <span class="tag is-alt2">2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT — yellow bg ── -->
+  <div id="aboutPinSpacer">
+  <section id="about" class="section-about">
+    <div class="about-inner">
+      <h2 class="about-heading" id="aboutHeading">
+        <span class="word">We</span> <span class="word">design</span> <span class="word">ambitious</span> <span class="word">buildings</span> <span class="word">for</span> <span class="word">serious</span> <span class="word">brands.</span> <span class="word">With</span> <span class="word">respect,</span> <span class="word">empathy</span> <span class="word">and</span> <span class="word">responsibility.</span><br><span class="white"><span class="word">We</span> <span class="word">make</span> <span class="word">work</span> <span class="word">matter.</span></span>
+      </h2>
+      <a href="/services" id="aboutBtn" class="button is-icon">
+        <span>See our services</span>
+        <span class="btn-arrow-left">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="btn-arrow-right">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </section>
+  </div><!-- /aboutPinSpacer -->
+
+  <!-- ── WORK ── -->
+  <section class="section-work">
+    <div class="section-top">
+      <div class="section-top-left">
+        <span class="tag">Our work</span>
+        <h2 class="heading-h2">Made with love</h2>
+      </div>
+      <a href="/work" class="button is-icon is-secondary">
+        <span>See our work</span>
+        <span class="btn-arrow-left">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="btn-arrow-right">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="work-grid">
+
+      <div class="work-item">
+        <div class="work-img-wrap"><img class="work-img" src="https://picsum.photos/seed/42/800/450" alt="Hospital CUF Açores"></div>
+        <div class="work-item-meta">
+          <div class="work-item-info">
+            <span class="work-item-name">Hospital CUF Açores</span>
+            <div class="work-item-cats"><span>Structural Design</span></div>
+          </div>
+          <div class="work-arrow">
+            <svg class="arr-right" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="arr-left" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-img-wrap"><img class="work-img" src="https://picsum.photos/seed/87/800/450" alt="ODE Living Hotel"></div>
+        <div class="work-item-meta">
+          <div class="work-item-info">
+            <span class="work-item-name">ODE Living Hotel</span>
+            <div class="work-item-cats"><span>Structural Design</span><span>·</span><span>Coordination</span></div>
+          </div>
+          <div class="work-arrow">
+            <svg class="arr-right" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="arr-left" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-img-wrap"><img class="work-img" src="https://picsum.photos/seed/63/800/450" alt="UMAY Resort"></div>
+        <div class="work-item-meta">
+          <div class="work-item-info">
+            <span class="work-item-name">UMAY Resort</span>
+            <div class="work-item-cats"><span>Structural Design in BIM</span></div>
+          </div>
+          <div class="work-arrow">
+            <svg class="arr-right" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="arr-left" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-img-wrap"><img class="work-img" src="https://picsum.photos/seed/19/800/450" alt="Jardins do Barreiro"></div>
+        <div class="work-item-meta">
+          <div class="work-item-info">
+            <span class="work-item-name">Jardins do Barreiro – LT2</span>
+            <div class="work-item-cats"><span>Structural Design</span><span>·</span><span>Coordination</span></div>
+          </div>
+          <div class="work-arrow">
+            <svg class="arr-right" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="arr-left" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── LOGOS ── -->
+  <div class="section-logos">
+    <div class="logos-track-wrap">
+      <div class="logos-row">
+        <span class="logo-name">Kintsugi</span>
+        <span class="logo-name">Stacked Lab</span>
+        <span class="logo-name">Magnolia</span>
+        <span class="logo-name">Powersurge</span>
+        <span class="logo-name">Warpspeed</span>
+        <span class="logo-name">Leapyear</span>
+        <span class="logo-name">EasyTax</span>
+        <span class="logo-name">Sisyphus</span>
+      </div>
+      <div class="logos-row" aria-hidden="true">
+        <span class="logo-name">Kintsugi</span>
+        <span class="logo-name">Stacked Lab</span>
+        <span class="logo-name">Magnolia</span>
+        <span class="logo-name">Powersurge</span>
+        <span class="logo-name">Warpspeed</span>
+        <span class="logo-name">Leapyear</span>
+        <span class="logo-name">EasyTax</span>
+        <span class="logo-name">Sisyphus</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TEAM ── -->
+  <div id="teamPinSpacer">
+  <section class="section-team">
+    <div class="team-header">
+      <div class="team-header-left">
+        <span class="tag">Team</span>
+        <h2 class="heading-h2" style="max-width:28rem;">Lovely people at plann. And Evee — whoof</h2>
+        <p class="body-m" style="color:var(--neutral-600);">We only hire nice people. To work with and to work with you.</p>
+      </div>
+      <a href="/about" class="button is-icon is-secondary">
+        <span>Secrets inside</span>
+        <span class="btn-arrow-left">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="btn-arrow-right">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="team-swiper-wrap" id="teamSwiper">
+      <div class="team-track" id="teamTrack">
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">André Areias</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">André Areias</p>
+            <p class="team-card-desc">Wine enthusiast</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">Élio Maia</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">Élio Maia</p>
+            <p class="team-card-desc">Goofy jokes</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">Gabriel Alves</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">Gabriel Alves</p>
+            <p class="team-card-desc">Non stop runner (until it stops)</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">Evee 🐶</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">Evee</p>
+            <p class="team-card-desc">Apple beggar</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">Luís Correia</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">Luís Correia</p>
+            <p class="team-card-desc">Mediocre comedian</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">Manuel Sardinha</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">Manuel Sardinha</p>
+            <p class="team-card-desc">Sugar free skater</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">Ricardo Rodrigues</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">Ricardo Rodrigues</p>
+            <p class="team-card-desc">Sniper jokes</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">Alice Rosmaninho</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">Alice Rosmaninho</p>
+            <p class="team-card-desc">Burrata tester</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-card-img-area">
+            <div class="team-card-img-ph">Karim Costa</div>
+            <div class="back-ph"></div>
+          </div>
+          <div class="team-card-text">
+            <p class="team-card-name">Karim Costa</p>
+            <p class="team-card-desc">Dark sciences (A.K.A. Geotechnics)</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  </div><!-- /teamPinSpacer -->
+
+  <!-- ── SERVICES ── -->
+  <div id="servicesPinSpacer">
+  <section class="section-services">
+
+    <!-- Left column: heading+desc+button at top, list at bottom -->
+    <div class="services-col-left">
+      <div class="services-col-top">
+        <span class="tag">Services</span>
+        <h2 class="heading-h2" style="margin-top:1rem;">We keep learning</h2>
+        <p class="services-header-desc" style="margin-top:1.5rem;">We dedicate half of our time sharpening our expertise — learning new skills, refining our tools, and continuously improving how we work. We are Agile fans and Lean advocates.</p>
+        <div style="margin-top:1.5rem;">
+          <a href="/services" class="button is-icon is-secondary">
+            <span>See our services</span>
+            <span class="btn-arrow-left">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="btn-arrow-right">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="services-col-bottom">
+        <ul class="services-list">
+          <li class="service-row active" onclick="activateService(0)">
+            <div class="service-left">
+              <span class="service-num">01</span>
+              <span class="service-name">BIM Coordination</span>
+            </div>
+            <svg class="service-arrow" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </li>
+          <li class="service-row" onclick="activateService(1)">
+            <div class="service-left">
+              <span class="service-num">02</span>
+              <span class="service-name">Structural &amp; Hydraulic Engineering</span>
+            </div>
+            <svg class="service-arrow" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </li>
+          <li class="service-row" onclick="activateService(2)">
+            <div class="service-left">
+              <span class="service-num">03</span>
+              <span class="service-name">Seismic Vulnerability Assessment</span>
+            </div>
+            <svg class="service-arrow" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </li>
+          <li class="service-row" onclick="activateService(3)">
+            <div class="service-left">
+              <span class="service-num">04</span>
+              <span class="service-name">Project Management</span>
+            </div>
+            <svg class="service-arrow" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </li>
+          <li class="service-row" onclick="activateService(4)">
+            <div class="service-left">
+              <span class="service-num">05</span>
+              <span class="service-name">Software Development</span>
+            </div>
+            <svg class="service-arrow" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right column: image only -->
+    <div class="services-col-right">
+      <div class="services-img" id="servicesImg">
+        <img class="svc-img active" src="HP-service-1.png" alt="BIM Coordination">
+        <img class="svc-img" src="HP-service-2.png" alt="Structural &amp; Hydraulic Engineering">
+        <img class="svc-img" src="HP-service-3.png" alt="Seismic Vulnerability Assessment">
+        <img class="svc-img" src="HP-service-4.png" alt="Project Management">
+        <img class="svc-img" src="HP-service-5.png" alt="Software Development">
+      </div>
+    </div>
+
+  </section>
+  </div><!-- /servicesPinSpacer -->
+
+  <!-- ── CTA ── -->
+  <section class="section-cta">
+    <div class="cta-inner">
+        <span class="tag">Contact</span>
+        <h2 class="heading-h2">Ready? Our doors are open</h2>
+        <p>Come to visit our office and have a coffee with us! If you can't come, you can always reach us by phone or email.</p>
+        <a href="/contact" class="button is-icon">
+          <span>Get in touch</span>
+          <span class="btn-arrow-left">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="btn-arrow-right">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.33 10h13.34M16.67 10l-5-5M16.67 10l-5 5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <svg width="80" height="17" viewBox="0 0 103 22" fill="none">
+          <path d="M38.1094 20.5308V9.40445C38.1094 8.01848 38.1094 7.3255 38.2467 6.75359C38.6829 4.93656 40.1016 3.51787 41.9186 3.08164C42.4905 2.94434 43.1835 2.94434 44.5695 2.94434H49.2648C50.6508 2.94434 51.3438 2.94434 51.9157 3.08164C53.7327 3.51787 55.1514 4.93656 55.5876 6.75359C55.7249 7.3255 55.7249 8.01848 55.7249 9.40445V20.5308" stroke="white" stroke-width="3.19456"/>
+          <path d="M38.1094 12.3687H55.7111" stroke="white" stroke-width="3.19456"/>
+          <path d="M3.27539 20.5308V2.94434H14.407C17.0345 2.94434 19.1663 5.07086 19.1727 7.69831C19.1793 10.3349 17.0437 12.4758 14.407 12.4758H3.29893" stroke="white" stroke-width="3.19456"/>
+          <path d="M23.9492 1.38546V8.45569C23.9492 10.6815 23.9492 11.7945 24.1697 12.7129C24.8703 15.6311 27.1487 17.9095 30.0668 18.61C30.9853 18.8305 32.0982 18.8305 34.3241 18.8305L34.9436 18.8305" stroke="white" stroke-width="3.19456"/>
+          <path d="M60.7793 20.5502V7.27478C60.7793 5.41715 60.7793 4.48834 60.9434 4.08871C61.4853 2.769 63.1243 2.31173 64.2711 3.16033C64.6184 3.4173 65.0992 4.21197 66.0609 5.80131L72.2557 16.0398C73.2174 17.6291 73.6982 18.4238 74.0455 18.6808C75.1923 19.5294 76.8313 19.0721 77.3732 17.7524C77.5373 17.3528 77.5373 16.4239 77.5373 14.5663V1.29171" stroke="white" stroke-width="3.09623"/>
+          <path d="M82.5762 20.5497V7.27429C82.5762 5.41667 82.5762 4.48785 82.7403 4.08822C83.2821 2.76851 84.9212 2.31125 86.068 3.15984C86.4153 3.41681 86.8961 4.21148 87.8577 5.80082L94.0526 16.0393C95.0143 17.6286 95.4951 18.4233 95.8424 18.6803C96.9892 19.5289 98.6282 19.0716 99.1701 17.7519C99.3342 17.3523 99.3342 16.4235 99.3342 14.5658V1.29122" stroke="white" stroke-width="3.09623"/>
+        </svg>
+        <p class="footer-about">A space of creativity where a small team of engineers make magic happen, with love and respect.</p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-heading">Menu</p>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/work">Work</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-heading">Social</p>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-heading">Legal</p>
+        <ul>
+          <li><a href="#">PRR</a></li>
+          <li><a href="#">IA nas PME</a></li>
+          <li><a href="#">ALGARVE 2030</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>2026 © Plann Engineering</span>
+      <a href="https://www.forwwward.studio/">Made by Forwwward Studio</a>
+    </div>
+  </footer>
+
+  <script>
+    /* ── WORD CYCLING ── */
+    const words = ['love','bim','empathy','respect','human intelligence','responsibility','dedication'];
+    const wordEl = document.getElementById('cyclingWord');
+    let wi = 0;
+    setInterval(() => {
+      wordEl.classList.add('exit');
+      setTimeout(() => {
+        wi = (wi + 1) % words.length;
+        wordEl.textContent = words[wi];
+        wordEl.classList.remove('exit');
+      }, 220);
+    }, 1800);
+    /* ── SERVICES scroll-hijack ── */
+    const servicesSpacer = document.getElementById('servicesPinSpacer');
+    const serviceRows    = document.querySelectorAll('.service-row');
+    const svcImgs        = document.querySelectorAll('.svc-img');
+    const N_SERVICES     = serviceRows.length;
+    let servicesSectionTop  = 0;
+    let servicesScrollDist  = 0;
+    let activeServiceIdx    = 0;
+
+    function activateService(idx) {
+      if (idx === activeServiceIdx) return;
+      activeServiceIdx = idx;
+      serviceRows.forEach((r, i) => r.classList.toggle('active', i === idx));
+      svcImgs.forEach((img, i) => img.classList.toggle('active', i === idx));
+    }
+
+    function initServices() {
+      const STEP = window.innerHeight * 0.6;
+      servicesScrollDist  = STEP * N_SERVICES;
+      servicesSectionTop  = servicesSpacer.getBoundingClientRect().top + window.scrollY;
+      servicesSpacer.style.height = (window.innerHeight + servicesScrollDist) + 'px';
+      updateServices();
+    }
+
+    function updateServices() {
+      const raw      = window.scrollY - servicesSectionTop;
+      const progress = Math.min(1, Math.max(0, raw / (servicesScrollDist || 1)));
+      const idx      = Math.min(N_SERVICES - 1, Math.floor(progress * N_SERVICES));
+      activateService(idx);
+    }
+
+    /* ── TEAM scroll-hijack ── */
+    const teamSpacer = document.getElementById('teamPinSpacer');
+    const teamTrack  = document.getElementById('teamTrack');
+    const teamSwiper = document.getElementById('teamSwiper');
+    let teamScrollDist  = 0;
+    let teamSectionTop  = 0;
+
+    function updateTeam() {
+      const raw      = window.scrollY - teamSectionTop;
+      const progress = Math.min(1, Math.max(0, raw / (teamScrollDist || 1)));
+      teamTrack.style.transform = `translateX(${-progress * teamScrollDist}px)`;
+    }
+
+    /* ── ABOUT two-phase reveal ── */
+    const aboutSpacer  = document.getElementById('aboutPinSpacer');
+    const aboutSection = document.getElementById('about');
+    const aboutWords   = aboutSection.querySelectorAll('.word');
+    const aboutBtn     = document.getElementById('aboutBtn');
+    const PHASE1_WORDS = 12; // "We design … responsibility."
+    const ABOUT_EXTRA  = ()  => window.innerHeight; // phase-2 scroll distance
+    let   aboutStickyTop = 0;
+
+    function initAbout() {
+      const extra = ABOUT_EXTRA();
+      aboutStickyTop = aboutSpacer.getBoundingClientRect().top + window.scrollY;
+      aboutSpacer.style.height = (window.innerHeight + extra) + 'px';
+      updateAbout();
+    }
+
+    function updateAbout() {
+      const vh    = window.innerHeight;
+      const sy    = window.scrollY;
+      const extra = ABOUT_EXTRA();
+
+      // Phase 1: words 0–11 reveal as section scrolls up into viewport
+      // Starts when section is ~45% visible (delayed a bit more)
+      const p1start = aboutStickyTop - vh * 0.42;
+      const phase1  = Math.min(1, Math.max(0, (sy - p1start) / (vh * 0.42)));
+
+      for (let i = 0; i < PHASE1_WORDS; i++) {
+        const start    = (i / (PHASE1_WORDS - 1)) * 0.36;
+        const wordProg = Math.min(1, Math.max(0, (phase1 - start) / 0.04));
+        aboutWords[i].style.opacity = 0.1 + 0.9 * wordProg;
+      }
+
+      // Phase 2: section is sticky at top — reveal last 4 words then button
+      const phase2 = Math.min(1, Math.max(0, (sy - aboutStickyTop) / extra));
+      const lastN  = aboutWords.length - PHASE1_WORDS; // 4
+
+      for (let i = PHASE1_WORDS; i < aboutWords.length; i++) {
+        const li       = i - PHASE1_WORDS;
+        const start    = (li / (lastN - 1)) * 0.40;
+        const wordProg = Math.min(1, Math.max(0, (phase2 - start) / 0.08));
+        aboutWords[i].style.opacity = 0.1 + 0.9 * wordProg;
+      }
+
+      const btnProg = Math.min(1, Math.max(0, (phase2 - 0.62) / 0.25));
+      aboutBtn.style.opacity   = btnProg;
+      aboutBtn.style.transform = `translateY(${(1 - btnProg) * 16}px)`;
+    }
+
+    /* ── HERO OVERLAY ── */
+    const heroOverlay = document.getElementById('heroOverlay');
+    function updateHeroOverlay() {
+      const progress = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
+      heroOverlay.style.opacity = progress * 0.5;
+    }
+
+    /* ── NAVBAR ── */
+    const navbar   = document.querySelector('.navbar-wrapper');
+    const heroSect = document.querySelector('.section-hero');
+    function updateNav() {
+      navbar.classList.toggle('is-hero', heroSect.getBoundingClientRect().bottom > 80);
+    }
+
+    /* ── INIT ALL — 3-RAF chain: about → team → services ── */
+    function initAll() {
+      requestAnimationFrame(() => {
+        initAbout();
+
+        requestAnimationFrame(() => {
+          teamScrollDist = Math.max(0, teamTrack.scrollWidth - teamSwiper.clientWidth);
+          teamSectionTop = teamSpacer.getBoundingClientRect().top + window.scrollY;
+          teamSpacer.style.height = (window.innerHeight + teamScrollDist) + 'px';
+          updateTeam();
+
+          requestAnimationFrame(() => {
+            initServices();
+          });
+        });
+      });
+    }
+
+    window.addEventListener('scroll', () => { updateNav(); updateHeroOverlay(); updateAbout(); updateTeam(); updateServices(); }, { passive: true });
+    window.addEventListener('resize', initAll);
+    window.addEventListener('load',   initAll);
+    updateNav();
+    initAll();
+    setTimeout(initAll, 400);
+  </script>
+</body>
+</html>
