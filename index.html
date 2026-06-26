@@ -462,7 +462,7 @@
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .section-about.is-leaving #aboutBtn {
+    .section-about.btn-ready #aboutBtn {
       opacity: 1;
       transform: translateY(0);
     }
@@ -1609,7 +1609,10 @@
       }
 
 
-      // Phase 3: trigger CSS transition when section unsticks
+      // Button appears just after last words finish (phase2 ≈ 0.48 + small buffer)
+      aboutSection.classList.toggle('btn-ready', phase2 >= 0.55);
+
+      // Phase 3: background changes when section fully unsticks
       aboutSection.classList.toggle('is-leaving', sy >= aboutStickyTop + extra);
     }
 
